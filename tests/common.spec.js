@@ -1,12 +1,12 @@
-import { test, expect } from '@playwright/test'
-import {logIn} from "../common/log-in";
+import {test, expect} from '@playwright/test'
+import {logIn} from '../common/log-in'
 
 test.describe('Common', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({page}) => {
     await logIn(page, process.env.EMAIL, process.env.PASSWORD)
   })
 
-  test('Navigation', async ({ page }) => {
+  test('Navigation', async ({page}) => {
     await page.getByTestId('topmenu-Курсы').click()
     await expect(page).toHaveURL('/course')
     await expect(page.getByText('Курсы программирования и тестирования')).toBeVisible()
@@ -21,6 +21,8 @@ test.describe('Common', () => {
 
     await page.getByTestId('topmenu-Дневник').click()
     await expect(page).toHaveURL('/diary?page=1')
-    await expect(page.getByText('Дневник успеваемости помогает достигать больших целей')).toBeVisible()
+    await expect(
+      page.getByText('Дневник успеваемости помогает достигать больших целей')
+    ).toBeVisible()
   })
 })
