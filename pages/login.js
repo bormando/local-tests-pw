@@ -1,11 +1,17 @@
-export default class LoginPage {
-  constructor(page) {
-    this.page = page
+import Page from './page'
 
-    this.inputEmail = page.locator('#normal_login_email')
-    this.inputPassword = page.locator('#normal_login_password')
-    this.buttonSubmit = page.locator('button[type="submit"]')
-    this.toast = page.locator('.ant-notification-notice-message')
+export default class LoginPage extends Page {
+  constructor(page) {
+    super(page)
+
+    this.input = {
+      email: page.locator('#normal_login_email'),
+      password: page.locator('#normal_login_password'),
+    }
+
+    this.button = {
+      submit: page.locator('button[type="submit"]'),
+    }
   }
 
   async open() {
@@ -13,8 +19,8 @@ export default class LoginPage {
   }
 
   async logIn(email, password) {
-    await this.inputEmail.fill(email)
-    await this.inputPassword.fill(password)
-    await this.buttonSubmit.click()
+    await this.input.email.fill(email)
+    await this.input.password.fill(password)
+    await this.button.submit.click()
   }
 }
